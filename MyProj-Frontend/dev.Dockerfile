@@ -1,14 +1,13 @@
-FROM node
+FROM node:12-alpine
 
-ENV NODE_ENV development
+WORKDIR /usr/src/app
 
-WORKDIR /react-app
+COPY package.json yarn.lock ./
 
-COPY ./package.json /react-app
 RUN yarn install
-
-COPY . .
 
 EXPOSE 3000
 
-CMD yarn start
+COPY . .
+
+CMD [ "yarn", "start" ]
